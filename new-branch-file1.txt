@@ -2,8 +2,13 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  i am modified this file in main branch......
 =======
 
  i am updating the file in new branch..
 >>>>>>> b0b6988 (modified the new-file in new branch)
+=======
+
+ i am updating the file in new branch..
+>>>>>>> new-branch
