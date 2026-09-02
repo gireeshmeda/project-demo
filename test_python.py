@@ -5,4 +5,7 @@ def test_new() :
   assert 1==2
 
 def test_check() :
-  assert ture
+  assert False
+
+def test_Check1() :
+  assert True
