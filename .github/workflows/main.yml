@@ -2,8 +2,8 @@ name: Setup and Test Node.js Project
 on:
   push:
     branches:
-      - *
-job:
+      - '*'
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
