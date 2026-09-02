@@ -1,6 +1,9 @@
 name: myfirst workflow
 
-on: push
+on: 
+  push:
+    branch:
+      - main
 
 jobs:
   print-msg:
