@@ -11,7 +11,7 @@ permissions:
   issues: write
 
 jobs:
-  check-main-push:
+  check-main-pushes:
     runs-on: ubuntu-latest
 
     steps:
