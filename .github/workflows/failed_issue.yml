@@ -1,0 +1,29 @@
+name : CI failed issue
+on:
+  push:
+    branches:
+      - main
+  
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create_failed_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create issue on failed CI
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { context } = require('@actions/github');
+            const { owner, repo } = context.repo;
+            const issueTitle = `CI failed on ${context.ref}`;
+            const issueBody = `The CI workflow has failed for the branch ${context.ref}. Please check the logs for more details.`;
+            
+            await github.issues.create({
+              owner,
+              repo,
+              title: issueTitle,
+              body: issueBody
+            });
