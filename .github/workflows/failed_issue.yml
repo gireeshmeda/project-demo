@@ -1,0 +1,32 @@
+name : CI failed issue
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+  
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create_failed_issue:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Create issue on failed CI
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { context } = require('@actions/github');
+            const { owner, repo } = context.repo;
+            const { workflow_run } = context.payload;
+            const issueTitle = `CI failed on ${workflow_run.head_branch}`;
+            const issueBody = `The CI workflow has failed for the branch ${workflow_run.head_branch}. Please check the logs for more details: ${workflow_run.html_url}`;
+            
+            await github.issues.create({
+              owner,
+              repo,
+              title: issueTitle,
+              body: issueBody
+            });
